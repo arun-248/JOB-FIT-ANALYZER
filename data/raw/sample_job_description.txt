@@ -1,0 +1,44 @@
+AI/ML Engineer (0-1 Year Experience)
+Location: Remote | Full-time
+
+ABOUT THE ROLE
+We are seeking a talented AI/ML Engineer to join our growing team. You will work on building 
+production-grade ML systems for clients across various industries including FinTech, Healthcare, 
+and Retail. This is a hands-on role where you'll design, develop, and deploy end-to-end ML solutions.
+
+REQUIRED SKILLS
+- Strong proficiency in Python programming
+- Solid understanding of Machine Learning fundamentals (supervised/unsupervised learning)
+- Experience with scikit-learn, Pandas, NumPy
+- Knowledge of NLP techniques (text preprocessing, TF-IDF, word embeddings)
+- Experience with spaCy or NLTK for NLP tasks
+- Understanding of model evaluation metrics and validation techniques
+- Basic knowledge of Deep Learning frameworks (TensorFlow or PyTorch)
+- Experience building REST APIs (FastAPI or Flask)
+- Familiarity with Git and version control
+- Strong problem-solving and communication skills
+
+PREFERRED SKILLS
+- Experience with MLOps tools (MLflow, Docker)
+- Knowledge of cloud platforms (AWS, Azure, or GCP)
+- Understanding of deployment pipelines
+- Experience with Transformers and Hugging Face
+- Exposure to real-world ML projects (internships, freelance, or personal projects)
+- Understanding of database systems (SQL and NoSQL)
+
+RESPONSIBILITIES
+- Design and implement ML models for client projects
+- Build end-to-end ML pipelines from data ingestion to deployment
+- Develop explainable AI solutions that clients can understand
+- Collaborate with cross-functional teams
+- Document models and create technical reports
+- Participate in code reviews and maintain high code quality
+
+WHAT WE OFFER
+- Competitive salary
+- Remote work flexibility
+- Learning and development opportunities
+- Work on diverse industry projects
+- Mentorship from senior engineers
+
+REQUIRED EXPERIENCE: 0-1 years in ML/AI engineering role

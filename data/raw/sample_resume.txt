@@ -1,0 +1,57 @@
+JOHN DOE
+Email: john.doe@email.com | Phone: +1-234-567-8900
+LinkedIn: linkedin.com/in/johndoe | GitHub: github.com/johndoe
+
+SUMMARY
+Aspiring Machine Learning Engineer with hands-on experience in building end-to-end ML pipelines. 
+Proficient in Python, scikit-learn, and data preprocessing. Completed multiple academic projects 
+in NLP and computer vision. Strong foundation in statistics and mathematics.
+
+EDUCATION
+Bachelor of Technology in Computer Science
+XYZ University, 2020-2024
+CGPA: 8.5/10
+Relevant Coursework: Machine Learning, Deep Learning, Natural Language Processing, Data Structures
+
+TECHNICAL SKILLS
+Programming Languages: Python, Java, C++, SQL
+ML/Data Science: Scikit-learn, Pandas, NumPy, Matplotlib, Seaborn
+NLP: NLTK, spaCy (basic understanding)
+Tools & Frameworks: Git, Jupyter, Flask, Docker (basic)
+Databases: MySQL, SQLite
+Other: Linux, Data Preprocessing, Feature Engineering
+
+EXPERIENCE
+Machine Learning Intern
+ABC Tech Solutions | June 2023 - August 2023 (3 months)
+- Developed a sentiment analysis model using NLTK and scikit-learn achieving 85% accuracy
+- Built data preprocessing pipelines for text data using Pandas
+- Collaborated with team of 3 engineers to deploy model as Flask API
+- Improved model performance by 10% through hyperparameter tuning
+
+PROJECTS
+Customer Churn Prediction System
+- Built end-to-end ML pipeline using Random Forest and Logistic Regression
+- Performed feature engineering on dataset with 50,000+ records
+- Achieved 82% accuracy and deployed using Flask API
+- Technologies: Python, Scikit-learn, Pandas, Flask
+
+Text Classification using TF-IDF
+- Implemented multi-class text classifier using TF-IDF vectorization
+- Compared performance of Naive Bayes, SVM, and Random Forest
+- Preprocessed 10,000+ text documents
+- Technologies: Python, Scikit-learn, NLTK
+
+Image Classification with CNN
+- Built CNN model using Keras for CIFAR-10 dataset
+- Achieved 78% test accuracy
+- Experimented with different architectures and regularization techniques
+- Technologies: Python, TensorFlow, Keras
+
+CERTIFICATIONS
+- Machine Learning Specialization - Coursera (Andrew Ng)
+- Python for Data Science - DataCamp
+
+ACHIEVEMENTS
+- Winner of College Hackathon 2023 (ML Track)
+- Published technical blog on Medium with 500+ views

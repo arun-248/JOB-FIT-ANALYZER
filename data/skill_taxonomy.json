@@ -1,0 +1,35 @@
+{
+  "programming_languages": [
+    "Python", "Java", "JavaScript", "C++", "C#", "R", "Go", "Rust", "TypeScript", "Kotlin", "Swift", "Scala", "Ruby", "PHP", "SQL"
+  ],
+  "ml_frameworks": [
+    "TensorFlow", "PyTorch", "Keras", "Scikit-learn", "XGBoost", "LightGBM", "CatBoost", "Pandas", "NumPy", "SciPy"
+  ],
+  "nlp_tools": [
+    "spaCy", "NLTK", "Hugging Face", "Transformers", "Gensim", "TextBlob", "Stanford NLP"
+  ],
+  "cloud_platforms": [
+    "AWS", "Azure", "Google Cloud", "GCP", "AWS SageMaker", "Azure ML", "Databricks"
+  ],
+  "databases": [
+    "MySQL", "PostgreSQL", "MongoDB", "Redis", "Cassandra", "DynamoDB", "SQLite", "Oracle", "SQL Server"
+  ],
+  "ml_ops": [
+    "Docker", "Kubernetes", "MLflow", "Kubeflow", "Airflow", "Jenkins", "Git", "GitHub", "GitLab"
+  ],
+  "web_frameworks": [
+    "FastAPI", "Flask", "Django", "Express.js", "React", "Node.js", "Spring Boot"
+  ],
+  "data_visualization": [
+    "Matplotlib", "Seaborn", "Plotly", "Tableau", "Power BI", "D3.js"
+  ],
+  "big_data": [
+    "Spark", "Hadoop", "Hive", "Kafka", "Flink", "Storm"
+  ],
+  "deep_learning": [
+    "CNN", "RNN", "LSTM", "GAN", "Transformer", "BERT", "GPT", "ResNet", "YOLO"
+  ],
+  "soft_skills": [
+    "Communication", "Team Collaboration", "Problem Solving", "Leadership", "Agile", "Scrum"
+  ]
+}

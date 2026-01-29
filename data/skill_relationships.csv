@@ -1,0 +1,47 @@
+base_skill,target_skill,has_base,skill_similarity,domain_overlap,difficulty,learning_days
+Python,Java,1,0.7,0.8,medium,60
+Python,JavaScript,1,0.6,0.5,easy,30
+Python,R,1,0.8,0.9,easy,45
+Java,Python,1,0.7,0.8,easy,45
+Scikit-learn,TensorFlow,1,0.8,1.0,medium,90
+Scikit-learn,PyTorch,1,0.8,1.0,medium,90
+TensorFlow,PyTorch,1,0.9,1.0,easy,30
+Pandas,NumPy,1,0.9,1.0,easy,15
+SQL,MySQL,1,0.95,1.0,easy,7
+SQL,PostgreSQL,1,0.95,1.0,easy,7
+Docker,Kubernetes,1,0.7,0.9,hard,120
+Flask,FastAPI,1,0.8,0.9,easy,21
+Django,FastAPI,1,0.7,0.8,medium,45
+Matplotlib,Seaborn,1,0.9,1.0,easy,14
+Matplotlib,Plotly,1,0.7,0.8,medium,30
+spaCy,NLTK,1,0.85,1.0,easy,30
+NLTK,spaCy,1,0.85,1.0,easy,30
+CNN,RNN,1,0.6,0.7,medium,60
+RNN,LSTM,1,0.9,1.0,easy,21
+BERT,GPT,1,0.8,0.9,medium,45
+Python,C++,1,0.5,0.6,hard,180
+JavaScript,TypeScript,1,0.9,1.0,easy,14
+React,Node.js,1,0.6,0.7,easy,30
+AWS,Azure,1,0.8,0.9,medium,60
+MySQL,MongoDB,0,0.5,0.6,medium,45
+SQL,NoSQL,0,0.4,0.5,medium,60
+Scikit-learn,Deep Learning,0,0.6,0.7,hard,120
+Statistics,Machine Learning,1,0.7,0.8,medium,90
+Linear Regression,Neural Networks,0,0.5,0.6,hard,150
+```
+
+4. Save (Ctrl + S)
+
+---
+
+### Verify your folder structure:
+
+Your `data` folder should look like this:
+```
+data/
+├── skill_taxonomy.json          ← This file
+├── skill_relationships.csv      ← This file  
+├── raw/
+│   ├── sample_resume.txt
+│   └── sample_job_description.txt
+└── processed/

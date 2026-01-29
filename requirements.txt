@@ -1,0 +1,14 @@
+numpy
+pandas
+scikit-learn
+spacy
+nltk
+PyMuPDF
+fastapi
+uvicorn
+pydantic
+python-multipart
+streamlit
+python-dateutil
+joblib
+requests

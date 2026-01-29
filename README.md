@@ -375,23 +375,6 @@ Feel free to use, modify, and distribute for educational and commercial purposes
 
 </div>
 
----
-
-## 🎓 Learning Resources
-
-Want to understand how this works? Check out:
-
-**NLP & Text Processing**
-- [spaCy 101](https://spacy.io/usage/spacy-101) - Learn NLP basics
-- [NLTK Documentation](https://www.nltk.org/) - Natural language toolkit
-
-**Machine Learning**
-- [scikit-learn Tutorials](https://scikit-learn.org/stable/tutorial/index.html) - ML fundamentals
-- [Google ML Crash Course](https://developers.google.com/machine-learning/crash-course) - Free ML course
-
-**Web Development**
-- [FastAPI Tutorial](https://fastapi.tiangolo.com/tutorial/) - Modern API development
-- [Streamlit Documentation](https://docs.streamlit.io/) - Build data apps
 
 ---
 

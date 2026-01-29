@@ -71,20 +71,17 @@
 ### 🏠 **Main Dashboard - Upload Interface**
 *Vibrant gradient UI with dual document upload*
 
-<!-- Add your screenshot here -->
-<!-- <img src="screenshots/dashboard.png" alt="Job Fit Analyzer Dashboard" width="800"/> -->
+<img src="https://github.com/arun-248/JOB-FIT-ANALYZER/blob/main/Main_Dashboard.png" alt="Job Fit Analyzer Dashboard" width="800"/> 
 
 ### 📊 **Analysis Results**
 *Comprehensive candidate intelligence report with scores*
 
-<!-- Add your screenshot here -->
-<!-- <img src="screenshots/analysis_results.png" alt="Analysis Results" width="800"/> -->
+<img src="https://github.com/arun-248/JOB-FIT-ANALYZER/blob/main/Analysis_Results.png" alt="Analysis Results" width="800"/> 
 
 ### 🔍 **Skill Gap Analysis**
 *Visual breakdown of matched and missing skills*
 
-<!-- Add your screenshot here -->
-<!-- <img src="screenshots/skill_gap.png" alt="Skill Gap Analysis" width="800"/> -->
+<img src="https://github.com/arun-248/JOB-FIT-ANALYZER/blob/main/Skill_Gap_Analysis.png" alt="Skill Gap Analysis" width="800"/>
 
 </div>
 

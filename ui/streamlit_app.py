@@ -1,5 +1,5 @@
 """
-Premium Job Fit Analyzer - Fixed Dark Blue Version
+Premium Job Fit Analyzer - WITH RECOMMENDATIONS TAB
 """
 
 import streamlit as st
@@ -20,7 +20,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Dark Blue Gradient CSS - FIXED VERSION
+# Dark Blue Gradient CSS
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -142,7 +142,7 @@ st.markdown("""
         margin: 2rem 0 1.5rem 0 !important;
     }
     
-    /* Premium input cards - PROPER BOXES */
+    /* Premium input cards */
     .input-card {
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(20px);
@@ -157,7 +157,6 @@ st.markdown("""
         position: relative;
     }
     
-    /* Ensure all Streamlit elements inside input-card are contained */
     .input-card * {
         position: relative;
         z-index: 1;
@@ -179,7 +178,7 @@ st.markdown("""
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     }
     
-    /* Resume card - Cyan border and glow */
+    /* Resume card */
     .resume-card {
         border-color: rgba(6, 182, 212, 0.5);
         background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(34, 211, 238, 0.08) 100%);
@@ -203,7 +202,7 @@ st.markdown("""
         text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
     }
     
-    /* JD card - Emerald border and glow */
+    /* JD card */
     .jd-card {
         border-color: rgba(16, 185, 129, 0.5);
         background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(52, 211, 153, 0.08) 100%);
@@ -262,7 +261,7 @@ st.markdown("""
         gap: 0.8rem;
     }
     
-    /* File uploader - GREY/ASH COLOR FOR DRAG DROP TEXT */
+    /* File uploader */
     .stFileUploader {
         background: rgba(255, 255, 255, 0.05) !important;
         border: 2px dashed rgba(255, 255, 255, 0.25) !important;
@@ -282,7 +281,6 @@ st.markdown("""
         font-size: 0.95rem !important;
     }
     
-    /* DRAG AND DROP TEXT - GREY/ASH COLOR */
     .stFileUploader [data-testid="stFileUploaderDropzoneInstructions"] {
         color: #9ca3af !important;
     }
@@ -321,7 +319,7 @@ st.markdown("""
         font-weight: 600 !important;
     }
     
-    /* STUNNING analyze button */
+    /* Analyze button */
     .stButton > button {
         background: linear-gradient(135deg, #f59e0b 0%, #fb923c 50%, #f97316 100%) !important;
         color: white !important;
@@ -343,7 +341,7 @@ st.markdown("""
         background: linear-gradient(135deg, #fb923c 0%, #f97316 100%) !important;
     }
     
-    /* Premium tabs */
+    /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
         background: rgba(255, 255, 255, 0.06);
         backdrop-filter: blur(10px);
@@ -374,7 +372,7 @@ st.markdown("""
         box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);
     }
     
-    /* Stunning score card */
+    /* Score card */
     .score-card {
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
         backdrop-filter: blur(25px);
@@ -557,6 +555,14 @@ st.markdown("""
         border-radius: 12px !important;
         border: 1px solid rgba(255, 255, 255, 0.08) !important;
     }
+    
+    /* Expander */
+    .streamlit-expanderHeader {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        color: white !important;
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -576,7 +582,7 @@ def initialize_pipeline():
 
 
 def display_results(report):
-    """Display analysis results"""
+    """Display analysis results WITH RECOMMENDATIONS TAB"""
     
     score = report['overall_score']
     recommendation = report['recommendation']
@@ -602,7 +608,7 @@ def display_results(report):
     
     st.markdown("---")
     
-    # COLORFUL HEADING - Purple
+    # Performance Breakdown
     st.markdown('<h2 class="section-title-purple">📊 Performance Breakdown</h2>', unsafe_allow_html=True)
     
     cols = st.columns(5)
@@ -616,8 +622,8 @@ def display_results(report):
             labels.append('Skills')
         elif 'experience' in key.lower():
             labels.append('Experience')
-        elif 'relevance' in key.lower():
-            labels.append('Relevance')
+        elif 'relevance' in key.lower() or 'semantic' in key.lower():
+            labels.append('Semantic Similarity')
         elif 'education' in key.lower():
             labels.append('Education')
         elif 'learning' in key.lower():
@@ -649,9 +655,16 @@ def display_results(report):
     
     st.markdown("---")
     
-    # Tabs
-    tab1, tab2, tab3, tab4 = st.tabs(["🎯 Skills Analysis", "💼 Experience Profile", "💪 Strengths & Gaps", "📄 Full Report"])
+    # TABS - NOW WITH 5TH TAB!
+    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+        "🎯 Skills Analysis", 
+        "💼 Experience Profile", 
+        "💪 Strengths & Gaps",
+        "📋 Recommendations",  # NEW!
+        "📄 Full Report"
+    ])
     
+    # TAB 1: Skills Analysis
     with tab1:
         col1, col2, col3 = st.columns(3)
         with col1:
@@ -688,6 +701,7 @@ def display_results(report):
         else:
             st.info("No significant skill gaps identified")
     
+    # TAB 2: Experience Profile
     with tab2:
         exp = report['experience_analysis']
         
@@ -714,6 +728,7 @@ def display_results(report):
                 </div>
             """, unsafe_allow_html=True)
     
+    # TAB 3: Strengths & Gaps
     with tab3:
         st.markdown('<h2 class="section-title-green">💪 Key Strengths</h2>', unsafe_allow_html=True)
         if report['strengths']:
@@ -753,7 +768,165 @@ def display_results(report):
                 </div>
             """, unsafe_allow_html=True)
     
+    # TAB 4: RECOMMENDATIONS (NEW!)
     with tab4:
+        st.markdown('<h2 class="section-title-pink">💡 Personalized Recommendations</h2>', unsafe_allow_html=True)
+        
+        # Check if advanced recommendations exist
+        if 'advanced_recommendations' not in report:
+            st.warning("⚠️ Advanced recommendations not available. Using older pipeline version.")
+            st.info("💡 To enable recommendations, update your pipeline.py and add recommendation_engine.py")
+        else:
+            recs = report['advanced_recommendations']
+            
+            # Section 1: Missing Keywords
+            st.markdown("### 🔑 Missing Keywords for ATS Optimization")
+            keywords = recs.get('keyword_suggestions', {})
+            
+            if keywords.get('missing_keywords'):
+                missing_kw = ', '.join(keywords['missing_keywords'][:8])
+                st.markdown(f"""
+                    <div class="warning-box">
+                        <strong>⚠️ Add these keywords to improve ATS score:</strong><br>
+                        {missing_kw}
+                    </div>
+                """, unsafe_allow_html=True)
+                
+                if keywords.get('recommendations'):
+                    st.markdown("**💡 Quick Actions:**")
+                    for rec in keywords['recommendations'][:5]:
+                        st.markdown(f"• {rec}")
+            else:
+                st.success("✅ All important keywords are present in your resume!")
+            
+            st.markdown("---")
+            
+            # Section 2: Job-Specific Recommendations
+            st.markdown("### 🎯 Job-Specific Advice")
+            job_spec = recs.get('job_specific', {})
+            
+            if job_spec.get('is_fresher_role'):
+                st.info("💡 This is a **FRESHER/ENTRY-LEVEL** role - no prior work experience required")
+            
+            assessment = job_spec.get('match_assessment', 'N/A')
+            st.markdown(f"""
+                <div class="info-box">
+                    <strong>Match Assessment:</strong><br>
+                    {assessment}
+                </div>
+            """, unsafe_allow_html=True)
+            
+            if job_spec.get('priority_actions'):
+                st.markdown("**🎯 Priority Actions:**")
+                for action in job_spec['priority_actions']:
+                    st.markdown(f"✅ {action}")
+            
+            st.markdown("---")
+            
+            # Section 3: Resume Rewrite Suggestions
+            st.markdown("### ✍️ Resume Improvements")
+            rewrites = recs.get('resume_rewrites', {})
+            
+            if rewrites.get('summary_rewrite'):
+                with st.expander("📝 Improved Professional Summary", expanded=True):
+                    st.markdown(f"""
+                        <div class="success-box">
+                            {rewrites['summary_rewrite']}
+                        </div>
+                    """, unsafe_allow_html=True)
+            
+            if rewrites.get('quick_tips'):
+                st.markdown("**⚡ Quick Resume Wins:**")
+                for tip in rewrites['quick_tips']:
+                    st.markdown(f"• {tip}")
+            
+            st.markdown("---")
+            
+            # Section 4: Project Recommendations
+            st.markdown("### 💡 Projects to Build")
+            projects = recs.get('projects', {})
+            
+            if projects.get('recommended_projects'):
+                for idx, proj in enumerate(projects['recommended_projects']):
+                    st.markdown(f"""
+                        <div class="info-box">
+                            <strong>{idx+1}. {proj['name']}</strong><br>
+                            ⏱️ Time: {proj['time']} | 📊 Difficulty: {proj['difficulty']}<br>
+                            🛠️ Skills: {', '.join(proj['skills'][:5])}
+                        </div>
+                    """, unsafe_allow_html=True)
+            
+            if projects.get('quick_wins'):
+                st.markdown("**⚡ Quick Win Projects (Start Here!):**")
+                for quick in projects['quick_wins']:
+                    st.markdown(f"• **{quick['name']}** - Can complete in {quick['time']}")
+            
+            st.markdown("---")
+            
+            # Section 5: Benchmark Comparison
+            st.markdown("### 📊 How You Compare to Other Candidates")
+            benchmark = recs.get('benchmark', {})
+            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Your Score", f"{benchmark.get('your_score', 0):.1f}")
+            with col2:
+                st.metric("Average Candidate", f"{benchmark.get('average_score', 0)}")
+            with col3:
+                st.metric("Top 25% Score", f"{benchmark.get('top_25_score', 0)}")
+            
+            percentile = benchmark.get('percentile', 0)
+            summary = benchmark.get('summary', 'N/A')
+            st.markdown(f"""
+                <div class="info-box">
+                    <strong>Your Percentile Rank: {percentile}th</strong><br>
+                    {summary}
+                </div>
+            """, unsafe_allow_html=True)
+            
+            if benchmark.get('insights'):
+                st.markdown("**💡 Competitive Insights:**")
+                for insight in benchmark['insights']:
+                    st.markdown(f"• {insight}")
+            
+            st.markdown("---")
+            
+            # Section 6: Improvement Roadmap
+            st.markdown("### 📈 30/60/90 Day Improvement Roadmap")
+            roadmap = recs.get('roadmap', {})
+            
+            current = roadmap.get('current_score', 0)
+            target = roadmap.get('target_score', 0)
+            gap = roadmap.get('score_gap', 0)
+            
+            st.metric("Target Score", f"{target}", f"+{gap:.1f} points needed")
+            
+            # Phase 1
+            phase1 = roadmap.get('phase_1', {})
+            with st.expander(f"🎯 {phase1.get('title', 'Phase 1: Weeks 1-2')}", expanded=True):
+                st.markdown(f"**Expected Impact:** {phase1.get('impact', 'N/A')}")
+                if phase1.get('actions'):
+                    for action in phase1['actions']:
+                        st.markdown(f"✅ {action}")
+            
+            # Phase 2
+            phase2 = roadmap.get('phase_2', {})
+            with st.expander(f"📚 {phase2.get('title', 'Phase 2: Weeks 3-6')}"):
+                st.markdown(f"**Expected Impact:** {phase2.get('impact', 'N/A')}")
+                if phase2.get('actions'):
+                    for action in phase2['actions']:
+                        st.markdown(f"✅ {action}")
+            
+            # Phase 3
+            phase3 = roadmap.get('phase_3', {})
+            with st.expander(f"🚀 {phase3.get('title', 'Phase 3: Weeks 7-12')}"):
+                st.markdown(f"**Expected Impact:** {phase3.get('impact', 'N/A')}")
+                if phase3.get('actions'):
+                    for action in phase3['actions']:
+                        st.markdown(f"✅ {action}")
+    
+    # TAB 5: Full Report (was tab4)
+    with tab5:
         st.json(report)
         
         col1, col2 = st.columns(2)
@@ -767,6 +940,7 @@ def display_results(report):
             )
         
         with col2:
+            exp = report['experience_analysis']
             summary = f"""CANDIDATE INTELLIGENCE REPORT
 Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 
@@ -794,7 +968,7 @@ MISSING SKILLS: {len(report['skill_analysis']['missing_skills'])}
 def main():
     """Main application"""
     
-    # Clean header
+    # Header
     st.markdown("""
         <div class="header-box">
             <h1>JOB FIT ANALYZER</h1>
@@ -806,14 +980,12 @@ def main():
     
     st.markdown("---")
     
-    # Upload Documents heading
+    # Upload Documents
     st.markdown('<h2 class="upload-heading">📤 Upload Documents</h2>', unsafe_allow_html=True)
     
-    # TWO SEPARATE INPUT BOXES - Side by side
     col1, col2 = st.columns(2, gap="large")
     
     with col1:
-        # Create the resume box with heading inside
         st.markdown("""
             <div class="input-card resume-card">
                 <h3>📄 Resume / CV</h3>
@@ -846,7 +1018,6 @@ def main():
         st.markdown('</div>', unsafe_allow_html=True)
     
     with col2:
-        # Create the JD box with heading inside
         st.markdown("""
             <div class="input-card jd-card">
                 <h3>📋 Job Description</h3>
@@ -931,6 +1102,8 @@ def main():
         
         except Exception as e:
             st.error(f"❌ Error: {str(e)}")
+            import traceback
+            st.error(f"Details: {traceback.format_exc()}")
             return
     
     # Display results

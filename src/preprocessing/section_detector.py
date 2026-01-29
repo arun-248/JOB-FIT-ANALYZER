@@ -1,5 +1,5 @@
 """
-Section Detector - Identifies sections in resume text
+Section Detector - Identifies sections in resume text (FIXED VERSION)
 """
 
 import re
@@ -17,7 +17,40 @@ class SectionDetector:
     """Detects and extracts structured sections from resume text"""
     
     def __init__(self):
-        self.section_patterns = SECTION_PATTERNS
+        # Enhanced section patterns with more variations
+        self.section_patterns = {
+            "experience": re.compile(
+                r"(work\s+experience|professional\s+experience|experience|employment\s+history|"
+                r"work\s+history|career\s+history|employment|professional\s+background|"
+                r"relevant\s+experience|job\s+history)",
+                re.IGNORECASE
+            ),
+            "education": re.compile(
+                r"(education|academic\s+background|qualifications?|degrees?|"
+                r"academic\s+qualifications|educational\s+background)",
+                re.IGNORECASE
+            ),
+            "skills": re.compile(
+                r"(skills|technical\s+skills|core\s+competencies|expertise|"
+                r"key\s+skills|competencies|technical\s+expertise|proficiencies)",
+                re.IGNORECASE
+            ),
+            "projects": re.compile(
+                r"(projects|portfolio|work\s+samples|key\s+projects|"
+                r"notable\s+projects|project\s+experience)",
+                re.IGNORECASE
+            ),
+            "certifications": re.compile(
+                r"(certifications?|certificates?|training|licenses?|"
+                r"professional\s+certifications|credentials)",
+                re.IGNORECASE
+            ),
+            "summary": re.compile(
+                r"(summary|professional\s+summary|profile|objective|"
+                r"career\s+objective|about\s+me|personal\s+statement)",
+                re.IGNORECASE
+            )
+        }
     
     def detect_sections(self, text: str) -> Dict[str, str]:
         """
@@ -41,11 +74,17 @@ class SectionDetector:
                 section_positions.append({
                     'name': section_name,
                     'start': match.start(),
-                    'header_end': match.end()
+                    'header_end': match.end(),
+                    'header_text': match.group()
                 })
         
         # Sort by position
         section_positions.sort(key=lambda x: x['start'])
+        
+        # DEBUG: Print found sections
+        print(f"  🔍 DEBUG: Found {len(section_positions)} section headers:")
+        for sec in section_positions:
+            print(f"     - {sec['name']}: '{sec['header_text']}' at position {sec['start']}")
         
         # Extract content for each section
         for i, section in enumerate(section_positions):
@@ -59,10 +98,27 @@ class SectionDetector:
             # Store the first occurrence of each section type
             if section['name'] not in sections:
                 sections[section['name']] = content
+                print(f"     ✓ Extracted {section['name']}: {len(content)} chars")
         
-        # If no sections found, treat entire text as general content
+        # FALLBACK: If no sections found, try to identify experience by keywords
+        if 'experience' not in sections and len(text) > 100:
+            print("  ⚠️  No 'experience' section found, trying fallback detection...")
+            # Look for date patterns (likely experience section)
+            date_pattern = r'\b(20\d{2}|19\d{2})\s*[-–—]\s*(20\d{2}|19\d{2}|present|current)\b'
+            date_matches = list(re.finditer(date_pattern, text, re.IGNORECASE))
+            
+            if date_matches:
+                # Assume experience section starts before first date
+                exp_start = max(0, date_matches[0].start() - 200)
+                # And ends after last date or at 50% of text
+                exp_end = min(len(text), date_matches[-1].end() + 500)
+                sections['experience'] = text[exp_start:exp_end].strip()
+                print(f"     ✓ FALLBACK: Extracted experience by date pattern: {len(sections['experience'])} chars")
+        
+        # If still no sections found, treat entire text as general content
         if not sections:
             sections['general'] = text
+            print("  ⚠️  No sections detected, using entire text as 'general'")
         
         return sections
     
@@ -103,28 +159,3 @@ class SectionDetector:
             contact_info['github'] = github_match.group()
         
         return contact_info
-
-
-# Test
-if __name__ == "__main__":
-    from src.preprocessing.pdf_parser import PDFParser
-    
-    parser = PDFParser()
-    detector = SectionDetector()
-    
-    resume_path = Path(__file__).parent.parent.parent / "data" / "raw" / "sample_resume.txt"
-    
-    if resume_path.exists():
-        text = parser.parse(resume_path)
-        sections = detector.detect_sections(text)
-        contact = detector.extract_contact_info(text)
-        
-        print("✓ Detected sections:")
-        for section_name, content in sections.items():
-            print(f"  - {section_name}: {len(content)} characters")
-        
-        print("\n✓ Contact info:")
-        for key, value in contact.items():
-            print(f"  - {key}: {value}")
-    else:
-        print("⚠ Test file not found")

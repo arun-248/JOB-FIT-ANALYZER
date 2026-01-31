@@ -1,5 +1,5 @@
 """
-Main Pipeline - WITH ADVANCED RECOMMENDATIONS ENGINE INTEGRATED
+Main Pipeline - WITH 4 KILLER FEATURES PROPERLY INTEGRATED
 """
 
 from typing import Dict, Union
@@ -16,11 +16,17 @@ from src.feature_extraction.experience_analyzer import ExperienceAnalyzer
 from src.feature_extraction.semantic_matcher import SemanticMatcher
 from src.models.skill_gap_classifier import SkillGapClassifier
 from src.models.scoring_engine import ScoringEngine
-from src.models.recommendation_engine import RecommendationEngine  # NEW!
+from src.models.recommendation_engine import RecommendationEngine
+
+# NEW: 4 KILLER FEATURES
+from src.feature_extraction.interview_question_generator import InterviewQuestionGenerator
+from src.feature_extraction.knowledge_graph import SkillKnowledgeGraph
+from src.feature_extraction.skill_depth_analyzer import SkillDepthAnalyzer
+from src.models.retention_predictor import SkillRetentionPredictor
 
 
 class CandidateIntelligencePipeline:
-    """Main pipeline with ADVANCED RECOMMENDATIONS"""
+    """Main pipeline with 4 KILLER FEATURES"""
     
     def __init__(self):
         # Initialize all components
@@ -32,7 +38,13 @@ class CandidateIntelligencePipeline:
         self.semantic_matcher = SemanticMatcher()
         self.skill_gap_classifier = SkillGapClassifier()
         self.scoring_engine = ScoringEngine()
-        self.recommendation_engine = RecommendationEngine()  # NEW!
+        self.recommendation_engine = RecommendationEngine()
+        
+        # NEW: 4 KILLER FEATURES
+        self.question_generator = InterviewQuestionGenerator()
+        self.knowledge_graph = SkillKnowledgeGraph()
+        self.depth_analyzer = SkillDepthAnalyzer()
+        self.retention_predictor = SkillRetentionPredictor()
         
         # Load or train skill gap model
         try:
@@ -43,12 +55,12 @@ class CandidateIntelligencePipeline:
     def analyze(self, resume_path: Union[str, Path], 
                 jd_path: Union[str, Path]) -> Dict:
         """
-        Run complete analysis pipeline WITH ADVANCED RECOMMENDATIONS
+        Run complete analysis pipeline WITH 4 KILLER FEATURES
         """
         print("🔄 Starting ADVANCED analysis pipeline...")
         
         # Step 1: Parse documents
-        print("  1/7 Parsing documents...")
+        print("  1/11 Parsing documents...")
         resume_text = self.pdf_parser.parse(resume_path)
         jd_text = self.pdf_parser.parse(jd_path)
         
@@ -56,17 +68,17 @@ class CandidateIntelligencePipeline:
         print(f"     - JD: {len(jd_text)} chars")
         
         # Step 2: Detect sections
-        print("  2/7 Detecting sections...")
+        print("  2/11 Detecting sections...")
         resume_sections = self.section_detector.detect_sections(resume_text)
         contact_info = self.section_detector.extract_contact_info(resume_text)
         
         # Step 3: Extract skills
-        print("  3/7 Extracting skills...")
+        print("  3/11 Extracting skills...")
         resume_skills = self.skill_extractor.extract_skills(resume_text)
         jd_skills = self.skill_extractor.extract_skills(jd_text)
         
-        # Step 4: Analyze experience (BOTH resume AND JD)
-        print("  4/7 Analyzing experience...")
+        # Step 4: Analyze experience
+        print("  4/11 Analyzing experience...")
         resume_experience = self._analyze_experience(resume_sections, resume_text)
         jd_experience = self._detect_required_experience(jd_text)
         
@@ -74,12 +86,12 @@ class CandidateIntelligencePipeline:
         print(f"     - Required: {jd_experience['required_years']} years, {jd_experience['required_level']}")
         
         # Step 5: Calculate semantic similarity
-        print("  5/7 Calculating similarity...")
+        print("  5/11 Calculating similarity...")
         similarity = self.semantic_matcher.calculate_similarity(resume_text, jd_text)
         print(f"     - Similarity: {similarity.get('overall_similarity', 0)}%")
         
         # Step 6: Generate scores
-        print("  6/7 Generating scores...")
+        print("  6/11 Generating scores...")
         skill_match = self._calculate_skill_match(resume_skills, jd_skills)
         skill_gaps = self._identify_skill_gaps(resume_skills, jd_skills)
         
@@ -100,8 +112,8 @@ class CandidateIntelligencePipeline:
             learning_potential=learning_potential
         )
         
-        # Step 7: Generate ADVANCED RECOMMENDATIONS (NEW!)
-        print("  7/7 Generating advanced recommendations...")
+        # Step 7: Generate ADVANCED RECOMMENDATIONS
+        print("  7/11 Generating advanced recommendations...")
         advanced_recommendations = self.recommendation_engine.generate_comprehensive_recommendations(
             overall_score=final_result['final_score'],
             component_scores=final_result['component_scores'],
@@ -116,6 +128,87 @@ class CandidateIntelligencePipeline:
             jd_text=jd_text,
             resume_text=resume_text,
             required_experience=jd_experience
+        )
+        
+        # ═══════════════════════════════════════════════════════════
+        # KILLER FEATURE #1: INTERVIEW QUESTIONS (TRULY DYNAMIC)
+        # ═══════════════════════════════════════════════════════════
+        print("  8/11 Generating interview questions...")
+        interview_questions = self.question_generator.generate_questions(
+            resume_skills=resume_skills,
+            experience_data=resume_experience,
+            jd_text=jd_text,
+            resume_text=resume_text,  # ← CRITICAL: Pass resume text for dynamic questions
+            top_n=10
+        )
+        
+        # ═══════════════════════════════════════════════════════════
+        # KILLER FEATURE #2: KNOWLEDGE GRAPH
+        # ═══════════════════════════════════════════════════════════
+        print("  9/11 Building knowledge graph...")
+        resume_skill_names = self._flatten_skill_names(resume_skills)
+        jd_skill_names = self._flatten_skill_names(jd_skills)
+        missing_skill_names = [s for s in jd_skill_names if s not in resume_skill_names]
+        
+        # Readiness analysis
+        readiness_analysis = []
+        for skill in missing_skill_names[:5]:
+            readiness = self.knowledge_graph.calculate_readiness(
+                known_skills=resume_skill_names,
+                target_skill=skill
+            )
+            readiness['skill'] = skill
+            readiness['prerequisite_skills'] = resume_skill_names[:3]
+            readiness_analysis.append(readiness)
+        
+        # Learning paths
+        learning_paths = []
+        for skill in missing_skill_names[:3]:
+            path = self.knowledge_graph.find_learning_path(
+                current_skills=resume_skill_names,
+                target_skill=skill
+            )
+            learning_paths.append({
+                'target_skill': skill,
+                'steps': path.get('learning_sequence', []),
+                'estimated_weeks': path.get('estimated_weeks', 4)
+            })
+        
+        # ═══════════════════════════════════════════════════════════
+        # KILLER FEATURE #3: SKILL DEPTH ANALYSIS
+        # ═══════════════════════════════════════════════════════════
+        print("  10/11 Analyzing skill depth...")
+        depth_analyses = self.depth_analyzer.analyze_all_skills(
+            skills_dict=resume_skills,
+            full_text=resume_text
+        )
+        
+        top_skills_by_depth = self.depth_analyzer.get_top_skills_by_depth(
+            depth_analyses=depth_analyses,
+            top_n=5
+        )
+        
+        # ═══════════════════════════════════════════════════════════
+        # KILLER FEATURE #4: RETENTION PREDICTION (TRULY DYNAMIC)
+        # ═══════════════════════════════════════════════════════════
+        print("  11/11 Predicting skill retention...")
+        missing_skills_data = [
+            {'skill': gap['skill'], 'learning_days': gap.get('learning_days', 60)}
+            for gap in skill_gaps[:5]
+        ]
+        
+        # ← CRITICAL: Create candidate profile for personalized predictions
+        candidate_profile = {
+            'total_years': resume_experience.get('total_years', 0),
+            'seniority_level': resume_experience.get('seniority_level', 'entry'),
+            'number_of_skills': len(resume_skill_names)
+        }
+        
+        retention_predictions = self.retention_predictor.batch_predict_retention(
+            missing_skills=missing_skills_data,
+            current_skills=resume_skill_names,
+            candidate_profile=candidate_profile,  # ← CRITICAL: Pass profile for personalization
+            expected_practice='occasional'
         )
         
         # Compile complete report
@@ -138,12 +231,32 @@ class CandidateIntelligencePipeline:
             'strengths': self.scoring_engine.generate_strengths(final_result['component_scores']),
             'top_gaps': self.scoring_engine.generate_gaps(skill_gaps, top_n=5),
             
-            # NEW: ADVANCED RECOMMENDATIONS
-            'advanced_recommendations': advanced_recommendations
+            # Advanced recommendations
+            'advanced_recommendations': advanced_recommendations,
+            
+            # NEW: 4 KILLER FEATURES
+            'interview_questions': interview_questions,
+            'knowledge_graph': {
+                'readiness_analysis': readiness_analysis,
+                'learning_paths': learning_paths
+            },
+            'depth_analysis': {
+                'top_skills': top_skills_by_depth,
+                'all_skills': depth_analyses
+            },
+            'retention_predictions': retention_predictions
         }
         
         print("✅ Advanced analysis complete!\n")
         return report
+    
+    def _flatten_skill_names(self, skills_dict: dict) -> list:
+        """Flatten skills dictionary to list of names"""
+        names = []
+        for category, skill_list in skills_dict.items():
+            for skill_data in skill_list:
+                names.append(skill_data['skill'])
+        return names
     
     def _analyze_experience(self, sections: Dict, full_text: str) -> Dict:
         """Analyze experience section"""
@@ -160,7 +273,7 @@ class CandidateIntelligencePipeline:
         return result
     
     def _detect_required_experience(self, jd_text: str) -> Dict:
-        """Detect required experience from job description"""
+        """Detect required experience from JD"""
         jd_lower = jd_text.lower()
         
         fresher_keywords = [

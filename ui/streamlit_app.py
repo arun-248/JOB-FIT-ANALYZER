@@ -1,5 +1,6 @@
 """
-Premium Job Fit Analyzer - WITH RECOMMENDATIONS TAB
+ENHANCED Job Fit Analyzer - COMPLETE UI
+Professional version with clean presentation
 """
 
 import streamlit as st
@@ -20,7 +21,10 @@ st.set_page_config(
     layout="wide"
 )
 
-# Dark Blue Gradient CSS
+# ═══════════════════════════════════════════════════════════════════════════════
+# CSS STYLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -29,7 +33,6 @@ st.markdown("""
         font-family: 'Inter', sans-serif;
     }
     
-    /* CONSISTENTLY VERY DARK BLUE BACKGROUND */
     .stApp {
         background: linear-gradient(180deg, #0a0e27 0%, #0f1629 50%, #1a1f3a 100%);
         background-attachment: fixed;
@@ -41,32 +44,17 @@ st.markdown("""
         max-width: 1400px;
     }
     
-    /* Clean header */
     .header-box {
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
         border-radius: 24px;
         padding: 2.5rem 2rem;
         text-align: center;
         margin-bottom: 3rem;
         border: 1px solid rgba(255, 255, 255, 0.2);
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        animation: fadeInDown 0.8s ease;
     }
     
-    @keyframes fadeInDown {
-        from {
-            opacity: 0;
-            transform: translateY(-30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    /* MAIN HEADING - Cyan to white gradient */
     .header-box h1 {
         background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 50%, #ffffff 100%);
         -webkit-background-clip: text;
@@ -78,7 +66,6 @@ st.markdown("""
         letter-spacing: -1px;
     }
     
-    /* SUBTITLE - Emerald to cyan gradient */
     .header-box .subtitle {
         background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
         -webkit-background-clip: text;
@@ -89,7 +76,6 @@ st.markdown("""
         margin-top: 0.8rem !important;
     }
     
-    /* Upload Documents heading - Yellow/Orange gradient */
     .upload-heading {
         background: linear-gradient(135deg, #fbbf24 0%, #fb923c 100%);
         -webkit-background-clip: text;
@@ -101,76 +87,15 @@ st.markdown("""
         text-align: center;
     }
     
-    /* Section headings - different colors */
-    .section-title-purple {
-        background: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-size: 1.8rem !important;
-        font-weight: 800 !important;
-        margin: 2rem 0 1.5rem 0 !important;
-    }
-    
-    .section-title-cyan {
-        background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-size: 1.8rem !important;
-        font-weight: 800 !important;
-        margin: 2rem 0 1.5rem 0 !important;
-    }
-    
-    .section-title-green {
-        background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-size: 1.8rem !important;
-        font-weight: 800 !important;
-        margin: 2rem 0 1.5rem 0 !important;
-    }
-    
-    .section-title-pink {
-        background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-size: 1.8rem !important;
-        font-weight: 800 !important;
-        margin: 2rem 0 1.5rem 0 !important;
-    }
-    
-    /* Premium input cards */
     .input-card {
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
         border-radius: 20px;
         padding: 2rem;
         border: 2px solid;
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         transition: all 0.4s ease;
-        animation: fadeInUp 0.6s ease;
         margin-bottom: 1.5rem;
-        position: relative;
-    }
-    
-    .input-card * {
-        position: relative;
-        z-index: 1;
-    }
-    
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
     }
     
     .input-card:hover {
@@ -178,15 +103,9 @@ st.markdown("""
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     }
     
-    /* Resume card */
     .resume-card {
         border-color: rgba(6, 182, 212, 0.5);
         background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(34, 211, 238, 0.08) 100%);
-    }
-    
-    .resume-card:hover {
-        border-color: rgba(6, 182, 212, 0.8);
-        box-shadow: 0 20px 50px rgba(6, 182, 212, 0.3);
     }
     
     .resume-card h3 {
@@ -194,23 +113,13 @@ st.markdown("""
         font-weight: 800 !important;
         font-size: 1.5rem !important;
         margin-bottom: 1.2rem !important;
-        margin-top: 0 !important;
         padding-bottom: 0.8rem;
         border-bottom: 2px solid rgba(34, 211, 238, 0.6);
-        background: none !important;
-        -webkit-text-fill-color: #22d3ee !important;
-        text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
     }
     
-    /* JD card */
     .jd-card {
         border-color: rgba(16, 185, 129, 0.5);
         background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(52, 211, 153, 0.08) 100%);
-    }
-    
-    .jd-card:hover {
-        border-color: rgba(16, 185, 129, 0.8);
-        box-shadow: 0 20px 50px rgba(16, 185, 129, 0.3);
     }
     
     .jd-card h3 {
@@ -218,108 +127,14 @@ st.markdown("""
         font-weight: 800 !important;
         font-size: 1.5rem !important;
         margin-bottom: 1.2rem !important;
-        margin-top: 0 !important;
         padding-bottom: 0.8rem;
         border-bottom: 2px solid rgba(52, 211, 153, 0.6);
-        background: none !important;
-        -webkit-text-fill-color: #34d399 !important;
-        text-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
     }
     
-    /* Text visibility */
     p, span, label, div {
         color: white !important;
     }
     
-    h3 {
-        color: white !important;
-        font-size: 1.4rem !important;
-        font-weight: 700 !important;
-        margin-top: 0 !important;
-    }
-    
-    h4 {
-        background: linear-gradient(135deg, #fbbf24 0%, #fb923c 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-weight: 700 !important;
-        font-size: 1.2rem !important;
-    }
-    
-    /* Radio buttons */
-    .stRadio > label {
-        color: white !important;
-        font-weight: 600 !important;
-        font-size: 0.95rem !important;
-    }
-    
-    .stRadio [role="radiogroup"] {
-        background: rgba(255, 255, 255, 0.06);
-        padding: 0.6rem;
-        border-radius: 10px;
-        gap: 0.8rem;
-    }
-    
-    /* File uploader */
-    .stFileUploader {
-        background: rgba(255, 255, 255, 0.05) !important;
-        border: 2px dashed rgba(255, 255, 255, 0.25) !important;
-        border-radius: 14px !important;
-        padding: 1.8rem !important;
-        transition: all 0.3s ease;
-    }
-    
-    .stFileUploader:hover {
-        background: rgba(255, 255, 255, 0.08) !important;
-        border-color: rgba(255, 255, 255, 0.4) !important;
-    }
-    
-    .stFileUploader label {
-        color: white !important;
-        font-weight: 600 !important;
-        font-size: 0.95rem !important;
-    }
-    
-    .stFileUploader [data-testid="stFileUploaderDropzoneInstructions"] {
-        color: #9ca3af !important;
-    }
-    
-    .stFileUploader [data-testid="stFileUploaderDropzoneInstructions"] span {
-        color: #9ca3af !important;
-    }
-    
-    .stFileUploader small {
-        color: #9ca3af !important;
-    }
-    
-    /* Text area */
-    .stTextArea textarea {
-        background: rgba(255, 255, 255, 0.06) !important;
-        border: 2px solid rgba(255, 255, 255, 0.15) !important;
-        border-radius: 12px !important;
-        color: white !important;
-        font-size: 0.95rem !important;
-        padding: 1rem !important;
-        transition: all 0.3s ease;
-    }
-    
-    .stTextArea textarea:focus {
-        background: rgba(255, 255, 255, 0.1) !important;
-        border-color: rgba(255, 255, 255, 0.3) !important;
-        box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
-    }
-    
-    .stTextArea textarea::placeholder {
-        color: rgba(255, 255, 255, 0.35) !important;
-    }
-    
-    .stTextArea label {
-        color: white !important;
-        font-weight: 600 !important;
-    }
-    
-    /* Analyze button */
     .stButton > button {
         background: linear-gradient(135deg, #f59e0b 0%, #fb923c 50%, #f97316 100%) !important;
         color: white !important;
@@ -338,91 +153,25 @@ st.markdown("""
     .stButton > button:hover {
         transform: translateY(-3px) !important;
         box-shadow: 0 15px 40px rgba(251, 146, 60, 0.6) !important;
-        background: linear-gradient(135deg, #fb923c 0%, #f97316 100%) !important;
     }
     
-    /* Tabs */
-    .stTabs [data-baseweb="tab-list"] {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        padding: 0.6rem;
-        border-radius: 14px;
-        gap: 0.4rem;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        background: transparent;
-        color: rgba(255, 255, 255, 0.6) !important;
-        border-radius: 10px;
-        padding: 0.75rem 1.3rem;
-        font-weight: 600;
-        font-size: 0.95rem;
-        transition: all 0.3s ease;
-    }
-    
-    .stTabs [data-baseweb="tab"]:hover {
-        background: rgba(255, 255, 255, 0.06);
-        color: white !important;
-    }
-    
-    .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%) !important;
-        color: white !important;
-        box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);
-    }
-    
-    /* Score card */
     .score-card {
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
         backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
         padding: 2.5rem;
         border-radius: 24px;
         text-align: center;
         border: 1px solid rgba(255, 255, 255, 0.2);
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         margin: 2rem 0;
-        animation: scaleIn 0.6s ease;
-    }
-    
-    @keyframes scaleIn {
-        from {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
     }
     
     .score-value {
         font-size: 4.5rem;
         font-weight: 900;
         margin: 1rem 0;
-        text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
     }
     
-    .score-label {
-        font-size: 0.95rem;
-        color: rgba(255, 255, 255, 0.7);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-weight: 600;
-    }
-    
-    .score-recommendation {
-        background: rgba(255, 255, 255, 0.12);
-        padding: 0.9rem 2rem;
-        border-radius: 12px;
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: white;
-        margin-top: 1rem;
-    }
-    
-    /* Component boxes */
     .component-box {
         background: rgba(255, 255, 255, 0.06);
         backdrop-filter: blur(10px);
@@ -436,31 +185,14 @@ st.markdown("""
     .component-box:hover {
         transform: translateY(-5px);
         background: rgba(255, 255, 255, 0.1);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        border-color: rgba(255, 255, 255, 0.2);
     }
     
-    /* Metrics */
-    [data-testid="stMetricValue"] {
-        font-size: 2rem !important;
-        color: white !important;
-        font-weight: 800 !important;
-    }
-    
-    [data-testid="stMetricLabel"] {
-        color: rgba(255, 255, 255, 0.7) !important;
-        font-size: 0.95rem !important;
-        font-weight: 600 !important;
-    }
-    
-    /* Info boxes */
     .info-box, .success-box, .warning-box, .danger-box {
         backdrop-filter: blur(10px);
         padding: 1rem 1.5rem;
         border-radius: 12px;
         margin: 1rem 0;
         border-left: 4px solid;
-        transition: all 0.3s ease;
     }
     
     .info-box {
@@ -483,12 +215,6 @@ st.markdown("""
         border-left-color: #ef4444;
     }
     
-    .info-box:hover, .success-box:hover, .warning-box:hover, .danger-box:hover {
-        transform: translateX(5px);
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-    }
-    
-    /* Skill pills */
     .skill-pill {
         background: linear-gradient(135deg, rgba(6, 182, 212, 0.7) 0%, rgba(34, 211, 238, 0.7) 100%);
         color: white;
@@ -498,75 +224,25 @@ st.markdown("""
         display: inline-block;
         font-weight: 600;
         font-size: 0.88rem;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.12);
     }
     
-    .skill-pill:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(6, 182, 212, 0.4);
-        background: linear-gradient(135deg, rgba(34, 211, 238, 0.8) 0%, rgba(6, 182, 212, 0.8) 100%);
-    }
-    
-    /* Gap cards */
-    .gap-card {
+    .report-section {
         background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        padding: 1rem 1.5rem;
+        padding: 1.5rem;
         border-radius: 12px;
-        margin: 0.8rem 0;
-        border-left: 4px solid;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        margin: 1rem 0;
+        border-left: 3px solid rgba(6, 182, 212, 0.6);
     }
     
-    .gap-card:hover {
-        background: rgba(255, 255, 255, 0.08);
-        transform: translateX(5px);
+    .report-section h4 {
+        color: #22d3ee !important;
+        margin-bottom: 1rem !important;
     }
     
-    /* Download buttons */
-    .stDownloadButton > button {
-        background: linear-gradient(135deg, rgba(6, 182, 212, 0.7) 0%, rgba(34, 211, 238, 0.7) 100%) !important;
-        color: white !important;
-        border: 1px solid rgba(255, 255, 255, 0.12) !important;
-        border-radius: 12px !important;
-        padding: 0.7rem 1.5rem !important;
-        font-weight: 600 !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .stDownloadButton > button:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 5px 20px rgba(6, 182, 212, 0.4) !important;
-    }
-    
-    /* Divider */
-    hr {
-        border: none;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        margin: 2.5rem 0 !important;
-    }
-    
-    /* JSON viewer */
-    .stJson {
-        background: rgba(0, 0, 0, 0.3) !important;
-        border-radius: 12px !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    }
-    
-    /* Expander */
-    .streamlit-expanderHeader {
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        color: white !important;
-        border-radius: 8px !important;
-        font-weight: 600 !important;
-    }
     </style>
 """, unsafe_allow_html=True)
 
-# Initialize session state
+# Session State
 if 'pipeline' not in st.session_state:
     st.session_state.pipeline = None
 if 'report' not in st.session_state:
@@ -581,8 +257,135 @@ def initialize_pipeline():
         st.success("✅ System Ready!")
 
 
+def format_full_report(report):
+    """Format report as readable text instead of JSON"""
+    
+    output = f"""
+# 🎯 CANDIDATE INTELLIGENCE REPORT
+**Generated:** {datetime.now().strftime('%B %d, %Y at %I:%M %p')}
+
+---
+
+## 📊 OVERALL ASSESSMENT
+
+**Match Score:** {report['overall_score']}/100
+**Recommendation:** {report['recommendation']}
+**Confidence Level:** {report['confidence']}
+
+---
+
+## 🎯 SKILLS ANALYSIS
+
+**Total Skills Found:** {report['skill_analysis']['total_skills_found']}
+**Match Percentage:** {report['skill_analysis']['match_percentage']}%
+
+### ✅ Matched Skills
+{', '.join(report['skill_analysis']['matched_skills'][:20]) if report['skill_analysis']['matched_skills'] else 'None'}
+
+### ⚠️ Missing Skills  
+{', '.join([gap['skill'] for gap in report['skill_analysis']['missing_skills'][:15]]) if report['skill_analysis']['missing_skills'] else 'None'}
+
+---
+
+## 💼 EXPERIENCE PROFILE
+
+**Total Years:** {report['experience_analysis']['total_years']}
+**Seniority Level:** {report['experience_analysis']['seniority_level'].title()}
+**Number of Roles:** {report['experience_analysis']['number_of_roles']}
+
+---
+
+## 📈 COMPONENT SCORES
+"""
+    
+    for key, value in report['component_scores'].items():
+        score_name = key.replace('_', ' ').title()
+        output += f"\n**{score_name}:** {value}/100"
+    
+    output += "\n\n---\n\n## 💪 KEY STRENGTHS\n"
+    if report.get('strengths'):
+        for strength in report['strengths']:
+            output += f"\n✅ {strength}"
+    else:
+        output += "\nNo significant strengths identified"
+    
+    output += "\n\n---\n\n## 🎯 CRITICAL SKILL GAPS\n"
+    if report.get('top_gaps'):
+        for gap in report['top_gaps'][:5]:
+            output += f"\n⚠️ **{gap['skill']}** - {gap['difficulty'].upper()} ({gap['learning_days']} days to learn)"
+    else:
+        output += "\nNo critical gaps identified"
+    
+    # Interview Questions
+    if 'interview_questions' in report:
+        output += "\n\n---\n\n## 💬 INTERVIEW QUESTIONS\n"
+        questions = report['interview_questions']
+        
+        if questions.get('verification_questions'):
+            output += "\n### Verification Questions:\n"
+            for i, q in enumerate(questions['verification_questions'], 1):
+                output += f"\n{i}. {q['question']}"
+        
+        if questions.get('depth_questions'):
+            output += "\n\n### Depth Questions:\n"
+            for i, q in enumerate(questions['depth_questions'], 1):
+                output += f"\n{i}. {q['question']}"
+    
+    # Knowledge Graph
+    if 'knowledge_graph' in report:
+        output += "\n\n---\n\n## 🕸️ SKILL READINESS ANALYSIS\n"
+        graph = report['knowledge_graph']
+        
+        if graph.get('readiness_analysis'):
+            for skill_data in graph['readiness_analysis'][:5]:
+                output += f"\n**{skill_data['skill']}:** {skill_data['readiness_score']}% ready"
+    
+    # Depth Analysis
+    if 'depth_analysis' in report:
+        output += "\n\n---\n\n## 🔍 TOP SKILLS BY DEPTH\n"
+        depth = report['depth_analysis']
+        
+        if depth.get('top_skills'):
+            for i, skill in enumerate(depth['top_skills'][:5], 1):
+                output += f"\n{i}. **{skill['skill']}** - Depth Score: {skill['depth_score']}/100"
+                output += f"\n   Evidence: {'⭐' * skill['evidence_strength']} | Context: {skill['context_quality']}"
+    
+    # Retention Predictions
+    if 'retention_predictions' in report:
+        output += "\n\n---\n\n## 🧠 RETENTION FORECAST\n"
+        predictions = report['retention_predictions']
+        
+        high = len([p for p in predictions if p['retention_probability'] >= 70])
+        medium = len([p for p in predictions if 40 <= p['retention_probability'] < 70])
+        low = len([p for p in predictions if p['retention_probability'] < 40])
+        
+        output += f"\n**High Retention Skills:** {high}"
+        output += f"\n**Medium Retention Skills:** {medium}"
+        output += f"\n**Low Retention Skills:** {low}"
+        
+        if predictions:
+            output += "\n\n### Detailed Predictions:\n"
+            for pred in predictions[:5]:
+                output += f"\n**{pred['skill']}:** {pred['retention_probability']}% retention probability"
+                output += f"\n   Category: {pred['retention_category'].upper()}"
+    
+    output += "\n\n---\n\n## 🎯 HIRING RECOMMENDATION\n\n"
+    
+    score = report['overall_score']
+    if score >= 75:
+        output += "✅ **STRONG HIRE** - Excellent match for the role. Proceed to interview."
+    elif score >= 60:
+        output += "⚠️ **POTENTIAL FIT** - Good candidate with some gaps. Consider for phone screen."
+    else:
+        output += "❌ **NOT RECOMMENDED** - Significant gaps present. May not be suitable."
+    
+    output += "\n\n---\n\n*End of Report*"
+    
+    return output
+
+
 def display_results(report):
-    """Display analysis results WITH RECOMMENDATIONS TAB"""
+    """Display analysis results"""
     
     score = report['overall_score']
     recommendation = report['recommendation']
@@ -595,11 +398,18 @@ def display_results(report):
     else:
         score_gradient = "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)"
     
+    # Score Card
     st.markdown(f"""
         <div class="score-card">
-            <div class="score-label">Overall Match Score</div>
-            <div class="score-value" style="background: {score_gradient}; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{score}</div>
-            <div class="score-recommendation">{recommendation}</div>
+            <div style="font-size: 0.95rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 2px; font-weight: 600;">
+                Overall Match Score
+            </div>
+            <div class="score-value" style="background: {score_gradient}; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                {score}
+            </div>
+            <div style="background: rgba(255,255,255,0.12); padding: 0.9rem 2rem; border-radius: 12px; font-size: 1.15rem; font-weight: 700; margin-top: 1rem;">
+                {recommendation}
+            </div>
             <div style="color: rgba(255,255,255,0.6); font-size: 0.92rem; margin-top: 1rem; font-weight: 500;">
                 Confidence: {report['confidence']}
             </div>
@@ -609,7 +419,7 @@ def display_results(report):
     st.markdown("---")
     
     # Performance Breakdown
-    st.markdown('<h2 class="section-title-purple">📊 Performance Breakdown</h2>', unsafe_allow_html=True)
+    st.markdown("## 📊 Performance Breakdown")
     
     cols = st.columns(5)
     scores = report['component_scores']
@@ -623,7 +433,7 @@ def display_results(report):
         elif 'experience' in key.lower():
             labels.append('Experience')
         elif 'relevance' in key.lower() or 'semantic' in key.lower():
-            labels.append('Semantic Similarity')
+            labels.append('Semantic')
         elif 'education' in key.lower():
             labels.append('Education')
         elif 'learning' in key.lower():
@@ -655,12 +465,16 @@ def display_results(report):
     
     st.markdown("---")
     
-    # TABS - NOW WITH 5TH TAB!
-    tab1, tab2, tab3, tab4, tab5 = st.tabs([
-        "🎯 Skills Analysis", 
-        "💼 Experience Profile", 
+    # Tabs
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs([
+        "🎯 Skills Analysis",
+        "💼 Experience Profile",
         "💪 Strengths & Gaps",
-        "📋 Recommendations",  # NEW!
+        "📋 Recommendations",
+        "💬 Interview Questions",
+        "🕸️ Knowledge Graph",
+        "🔍 Skill Depth",
+        "🧠 Retention Forecast",
         "📄 Full Report"
     ])
     
@@ -674,7 +488,7 @@ def display_results(report):
         with col3:
             st.metric("Missing Skills", len(report['skill_analysis']['missing_skills']))
         
-        st.markdown('<h4 style="margin-top: 1.5rem;">✅ Matched Skills</h4>', unsafe_allow_html=True)
+        st.markdown("### ✅ Matched Skills")
         matched = report['skill_analysis']['matched_skills'][:15]
         if matched:
             pills = ' '.join([f'<span class="skill-pill">{s}</span>' for s in matched])
@@ -682,14 +496,15 @@ def display_results(report):
         else:
             st.info("No matched skills found")
         
-        st.markdown('<h4 style="margin-top: 1.5rem;">⚠️ Skill Gaps to Address</h4>', unsafe_allow_html=True)
-        if report['top_gaps']:
+        st.markdown("### ⚠️ Skill Gaps to Address")
+        if report.get('top_gaps'):
             for gap in report['top_gaps'][:5]:
                 colors = {'easy': '#22c55e', 'medium': '#fb923c', 'hard': '#ef4444'}
                 emojis = {'easy': '🟢', 'medium': '🟡', 'hard': '🔴'}
                 
                 st.markdown(f"""
-                    <div class="gap-card" style="border-left-color: {colors[gap['difficulty']]};">
+                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; 
+                                margin: 0.8rem 0; border-left: 4px solid {colors[gap['difficulty']]};">
                         <strong style="font-size: 1.05rem;">{emojis[gap['difficulty']]} {gap['skill']}</strong><br>
                         <small style="color: rgba(255,255,255,0.6);">
                             {gap['category'].replace('_', ' ').title()} • 
@@ -730,8 +545,8 @@ def display_results(report):
     
     # TAB 3: Strengths & Gaps
     with tab3:
-        st.markdown('<h2 class="section-title-green">💪 Key Strengths</h2>', unsafe_allow_html=True)
-        if report['strengths']:
+        st.markdown("## 💪 Key Strengths")
+        if report.get('strengths'):
             for strength in report['strengths']:
                 st.markdown(f"""
                     <div class="success-box">
@@ -741,226 +556,291 @@ def display_results(report):
         else:
             st.info("No significant strengths identified")
         
-        st.markdown('<h2 class="section-title-cyan">🎯 Hiring Recommendation</h2>', unsafe_allow_html=True)
+        st.markdown("## 🎯 Hiring Recommendation")
         
         if score >= 75:
             st.markdown("""
                 <div class="success-box">
                     <strong>✅ STRONG HIRE - Excellent Match</strong><br>
-                    This candidate demonstrates exceptional alignment with role requirements. 
-                    Recommend immediate interview scheduling.
+                    This candidate demonstrates exceptional alignment with role requirements.
                 </div>
             """, unsafe_allow_html=True)
         elif score >= 60:
             st.markdown("""
                 <div class="warning-box">
                     <strong>⚠️ POTENTIAL FIT - Good Candidate</strong><br>
-                    Solid candidate with some skill gaps. Consider for phone screen to assess 
-                    learning ability and cultural fit.
+                    Solid candidate with some skill gaps. Consider for phone screen.
                 </div>
             """, unsafe_allow_html=True)
         else:
             st.markdown("""
                 <div class="danger-box">
                     <strong>⚠️ NOT RECOMMENDED - Significant Gaps</strong><br>
-                    Substantial skill and experience gaps present. Would require extensive 
-                    training and onboarding support.
+                    Substantial skill and experience gaps present.
                 </div>
             """, unsafe_allow_html=True)
     
-    # TAB 4: RECOMMENDATIONS (NEW!)
+    # TAB 4: Recommendations
     with tab4:
-        st.markdown('<h2 class="section-title-pink">💡 Personalized Recommendations</h2>', unsafe_allow_html=True)
+        st.markdown("## 💡 Personalized Recommendations")
         
-        # Check if advanced recommendations exist
         if 'advanced_recommendations' not in report:
-            st.warning("⚠️ Advanced recommendations not available. Using older pipeline version.")
-            st.info("💡 To enable recommendations, update your pipeline.py and add recommendation_engine.py")
+            st.info("Advanced recommendations will be available after pipeline enhancement")
         else:
             recs = report['advanced_recommendations']
             
-            # Section 1: Missing Keywords
-            st.markdown("### 🔑 Missing Keywords for ATS Optimization")
+            st.markdown("### 🔑 Missing Keywords for ATS")
             keywords = recs.get('keyword_suggestions', {})
-            
             if keywords.get('missing_keywords'):
                 missing_kw = ', '.join(keywords['missing_keywords'][:8])
-                st.markdown(f"""
-                    <div class="warning-box">
-                        <strong>⚠️ Add these keywords to improve ATS score:</strong><br>
-                        {missing_kw}
-                    </div>
-                """, unsafe_allow_html=True)
+                st.warning(f"**Add these:** {missing_kw}")
                 
                 if keywords.get('recommendations'):
-                    st.markdown("**💡 Quick Actions:**")
                     for rec in keywords['recommendations'][:5]:
                         st.markdown(f"• {rec}")
             else:
-                st.success("✅ All important keywords are present in your resume!")
+                st.success("✅ All important keywords present")
             
-            st.markdown("---")
-            
-            # Section 2: Job-Specific Recommendations
             st.markdown("### 🎯 Job-Specific Advice")
             job_spec = recs.get('job_specific', {})
-            
-            if job_spec.get('is_fresher_role'):
-                st.info("💡 This is a **FRESHER/ENTRY-LEVEL** role - no prior work experience required")
-            
-            assessment = job_spec.get('match_assessment', 'N/A')
-            st.markdown(f"""
-                <div class="info-box">
-                    <strong>Match Assessment:</strong><br>
-                    {assessment}
-                </div>
-            """, unsafe_allow_html=True)
-            
             if job_spec.get('priority_actions'):
-                st.markdown("**🎯 Priority Actions:**")
                 for action in job_spec['priority_actions']:
                     st.markdown(f"✅ {action}")
+    
+    # TAB 5: Interview Questions
+    with tab5:
+        st.markdown("## 💬 Interview Questions")
+        
+        if 'interview_questions' not in report:
+            st.info("💡 Interview questions will be generated when using the enhanced pipeline")
+            st.markdown("""
+            **This feature will auto-generate:**
+            - Verification questions to check resume claims
+            - Depth questions to test technical knowledge
+            - Practical scenario-based questions
+            - Red flag detection for inconsistencies
+            """)
+        else:
+            questions = report['interview_questions']
             
-            st.markdown("---")
+            st.markdown("### ✅ Verification Questions")
+            st.caption("Ask these to verify resume claims")
             
-            # Section 3: Resume Rewrite Suggestions
-            st.markdown("### ✍️ Resume Improvements")
-            rewrites = recs.get('resume_rewrites', {})
+            for i, q in enumerate(questions.get('verification_questions', []), 1):
+                with st.expander(f"❓ Question {i}: {q.get('skill_tested', 'General')}", expanded=(i==1)):
+                    st.markdown(f"**{q['question']}**")
+                    st.caption(f"🎯 Difficulty: {q.get('difficulty', 'Medium')} | Purpose: {q.get('purpose', 'Verification')}")
             
-            if rewrites.get('summary_rewrite'):
-                with st.expander("📝 Improved Professional Summary", expanded=True):
-                    st.markdown(f"""
-                        <div class="success-box">
-                            {rewrites['summary_rewrite']}
-                        </div>
-                    """, unsafe_allow_html=True)
+            st.markdown("### 🔬 Depth Questions")
+            st.caption("Probe how well they know the skills")
             
-            if rewrites.get('quick_tips'):
-                st.markdown("**⚡ Quick Resume Wins:**")
-                for tip in rewrites['quick_tips']:
-                    st.markdown(f"• {tip}")
+            for i, q in enumerate(questions.get('depth_questions', []), 1):
+                st.markdown(f"**Q{i}:** {q['question']}")
+                st.caption(f"Tests: {q.get('skill_tested', 'General knowledge')}")
+                st.markdown("---")
             
-            st.markdown("---")
+            st.markdown("### 🛠️ Practical/Scenario Questions")
+            for i, q in enumerate(questions.get('practical_questions', []), 1):
+                st.markdown(f"**Q{i}:** {q['question']}")
+                st.markdown("---")
             
-            # Section 4: Project Recommendations
-            st.markdown("### 💡 Projects to Build")
-            projects = recs.get('projects', {})
+            if questions.get('red_flag_questions'):
+                st.markdown("### 🚩 Red Flag Questions")
+                st.warning("⚠️ Ask if you suspect exaggeration")
+                for i, q in enumerate(questions['red_flag_questions'], 1):
+                    st.error(f"**Q{i}:** {q['question']}")
+                    st.caption(f"Why: {q.get('rationale', 'Verify claim')}")
+    
+    # TAB 6: Knowledge Graph
+    with tab6:
+        st.markdown("## 🕸️ Knowledge Graph & Learning Paths")
+        
+        if 'knowledge_graph' not in report:
+            st.info("💡 Knowledge graph analysis will be available when using the enhanced pipeline")
+            st.markdown("""
+            **This feature will provide:**
+            - Readiness scores for missing skills
+            - Prerequisites and skill relationships
+            - Optimal learning paths using graph algorithms
+            - Transferable skills analysis
+            """)
+        else:
+            graph = report['knowledge_graph']
             
-            if projects.get('recommended_projects'):
-                for idx, proj in enumerate(projects['recommended_projects']):
-                    st.markdown(f"""
-                        <div class="info-box">
-                            <strong>{idx+1}. {proj['name']}</strong><br>
-                            ⏱️ Time: {proj['time']} | 📊 Difficulty: {proj['difficulty']}<br>
-                            🛠️ Skills: {', '.join(proj['skills'][:5])}
-                        </div>
-                    """, unsafe_allow_html=True)
+            st.markdown("### 📊 Readiness for Missing Skills")
+            st.caption("How close is candidate to learning each missing skill?")
             
-            if projects.get('quick_wins'):
-                st.markdown("**⚡ Quick Win Projects (Start Here!):**")
-                for quick in projects['quick_wins']:
-                    st.markdown(f"• **{quick['name']}** - Can complete in {quick['time']}")
+            for skill_data in graph.get('readiness_analysis', []):
+                skill_name = skill_data['skill']
+                score = skill_data['readiness_score']
+                prereqs = skill_data.get('prerequisite_skills', [])
+                
+                if score >= 70:
+                    color = "#22c55e"
+                    status = "🟢 READY"
+                elif score >= 40:
+                    color = "#fb923c"
+                    status = "🟡 MODERATE"
+                else:
+                    color = "#ef4444"
+                    status = "🔴 CHALLENGING"
+                
+                col1, col2 = st.columns([3, 1])
+                with col1:
+                    st.progress(score/100, text=f"{skill_name}")
+                with col2:
+                    st.markdown(f"**{score}%**")
+                    
+                st.caption(f"{status} | Already knows: {', '.join(prereqs[:3]) if prereqs else 'None'}")
+                st.markdown("---")
             
-            st.markdown("---")
+            st.markdown("### 🛤️ Optimal Learning Paths")
+            st.caption("Step-by-step paths using graph algorithms")
             
-            # Section 5: Benchmark Comparison
-            st.markdown("### 📊 How You Compare to Other Candidates")
-            benchmark = recs.get('benchmark', {})
+            for path in graph.get('learning_paths', []):
+                with st.expander(f"📚 Path to: {path['target_skill']}"):
+                    steps = path.get('steps', [])
+                    if steps:
+                        for i, step in enumerate(steps, 1):
+                            st.markdown(f"**Step {i}:** {step}")
+                    else:
+                        st.info("Direct learning path - no prerequisites needed")
+                    
+                    time = path.get('estimated_weeks', 'Unknown')
+                    st.success(f"⏱️ Estimated time: {time} weeks")
+    
+    # TAB 7: Skill Depth
+    with tab7:
+        st.markdown("## 🔍 Skill Depth Analysis")
+        
+        if 'depth_analysis' not in report:
+            st.info("💡 Skill depth analysis will be available when using the enhanced pipeline")
+            st.markdown("""
+            **This feature will analyze:**
+            - Evidence strength (1-5 stars)
+            - Context quality (theory/hands-on/production)
+            - Experience level per skill
+            - Proof points (metrics, years, scale)
+            """)
+        else:
+            depth = report['depth_analysis']
+            
+            st.markdown("### ⭐ Top 5 Skills by Depth")
+            
+            for i, skill in enumerate(depth.get('top_skills', [])[:5], 1):
+                skill_name = skill['skill']
+                depth_score = skill['depth_score']
+                evidence = skill['evidence_strength']
+                context = skill['context_quality']
+                proofs = skill.get('proof_points', [])
+                
+                with st.container():
+                    st.markdown(f"#### #{i} {skill_name}")
+                    
+                    col1, col2, col3 = st.columns(3)
+                    with col1:
+                        st.metric("Depth Score", f"{depth_score}/100")
+                    with col2:
+                        st.metric("Evidence", "⭐" * min(evidence, 5))
+                    with col3:
+                        st.metric("Context", context.upper())
+                    
+                    if proofs:
+                        st.success(f"**Evidence:** {proofs[0]}")
+                    
+                    st.markdown("---")
+            
+            with st.expander("📋 View All Skills Depth Scores"):
+                all_skills = depth.get('all_skills', {})
+                if all_skills:
+                    for skill_name, skill_data in all_skills.items():
+                        st.markdown(f"**{skill_name}:** {skill_data['depth_score']}/100")
+                else:
+                    st.info("No detailed depth analysis available")
+    
+    # TAB 8: Retention Forecast
+    with tab8:
+        st.markdown("## 🧠 Skill Retention Forecast")
+        
+        if 'retention_predictions' not in report:
+            st.info("💡 Retention predictions will be available when using the enhanced pipeline")
+            st.markdown("""
+            **This feature will predict:**
+            - Retention probability for each skill
+            - Based on cognitive science (forgetting curve)
+            - Optimal review schedules
+            - Learning strategy recommendations
+            """)
+        else:
+            predictions = report['retention_predictions']
+            
+            high = len([p for p in predictions if p['retention_probability'] >= 70])
+            medium = len([p for p in predictions if 40 <= p['retention_probability'] < 70])
+            low = len([p for p in predictions if p['retention_probability'] < 40])
             
             col1, col2, col3 = st.columns(3)
-            with col1:
-                st.metric("Your Score", f"{benchmark.get('your_score', 0):.1f}")
-            with col2:
-                st.metric("Average Candidate", f"{benchmark.get('average_score', 0)}")
-            with col3:
-                st.metric("Top 25% Score", f"{benchmark.get('top_25_score', 0)}")
-            
-            percentile = benchmark.get('percentile', 0)
-            summary = benchmark.get('summary', 'N/A')
-            st.markdown(f"""
-                <div class="info-box">
-                    <strong>Your Percentile Rank: {percentile}th</strong><br>
-                    {summary}
-                </div>
-            """, unsafe_allow_html=True)
-            
-            if benchmark.get('insights'):
-                st.markdown("**💡 Competitive Insights:**")
-                for insight in benchmark['insights']:
-                    st.markdown(f"• {insight}")
+            col1.metric("🟢 High Retention", high)
+            col2.metric("🟡 Medium Retention", medium)
+            col3.metric("🔴 Low Retention", low)
             
             st.markdown("---")
+            st.markdown("### 📊 Detailed Retention Forecast")
             
-            # Section 6: Improvement Roadmap
-            st.markdown("### 📈 30/60/90 Day Improvement Roadmap")
-            roadmap = recs.get('roadmap', {})
-            
-            current = roadmap.get('current_score', 0)
-            target = roadmap.get('target_score', 0)
-            gap = roadmap.get('score_gap', 0)
-            
-            st.metric("Target Score", f"{target}", f"+{gap:.1f} points needed")
-            
-            # Phase 1
-            phase1 = roadmap.get('phase_1', {})
-            with st.expander(f"🎯 {phase1.get('title', 'Phase 1: Weeks 1-2')}", expanded=True):
-                st.markdown(f"**Expected Impact:** {phase1.get('impact', 'N/A')}")
-                if phase1.get('actions'):
-                    for action in phase1['actions']:
-                        st.markdown(f"✅ {action}")
-            
-            # Phase 2
-            phase2 = roadmap.get('phase_2', {})
-            with st.expander(f"📚 {phase2.get('title', 'Phase 2: Weeks 3-6')}"):
-                st.markdown(f"**Expected Impact:** {phase2.get('impact', 'N/A')}")
-                if phase2.get('actions'):
-                    for action in phase2['actions']:
-                        st.markdown(f"✅ {action}")
-            
-            # Phase 3
-            phase3 = roadmap.get('phase_3', {})
-            with st.expander(f"🚀 {phase3.get('title', 'Phase 3: Weeks 7-12')}"):
-                st.markdown(f"**Expected Impact:** {phase3.get('impact', 'N/A')}")
-                if phase3.get('actions'):
-                    for action in phase3['actions']:
-                        st.markdown(f"✅ {action}")
+            for pred in predictions:
+                skill = pred['skill']
+                prob = pred['retention_probability']
+                category = pred['retention_category']
+                schedule = pred.get('review_schedule', 'Every 7 days')
+                
+                if prob >= 70:
+                    emoji = "🟢"
+                elif prob >= 40:
+                    emoji = "🟡"
+                else:
+                    emoji = "🔴"
+                
+                col1, col2 = st.columns([3, 1])
+                with col1:
+                    st.progress(prob/100, text=f"{emoji} {skill}")
+                with col2:
+                    st.markdown(f"**{prob}%**")
+                
+                st.caption(f"Category: {category.upper()} | Review: {schedule}")
+                st.markdown("---")
     
-    # TAB 5: Full Report (was tab4)
-    with tab5:
-        st.json(report)
+    # TAB 9: Full Report (FORMATTED TEXT)
+    with tab9:
+        st.markdown("## 📄 Complete Analysis Report")
         
+        # Format report as text
+        formatted_report = format_full_report(report)
+        
+        # Display in a nice text area
+        st.markdown("""
+            <div class="report-section">
+        """, unsafe_allow_html=True)
+        
+        st.markdown(formatted_report)
+        
+        st.markdown("</div>", unsafe_allow_html=True)
+        
+        # Download buttons
         col1, col2 = st.columns(2)
         with col1:
             st.download_button(
-                "📥 Download JSON Report",
-                json.dumps(report, indent=2),
-                f"candidate_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
-                "application/json",
+                "📥 Download Full Report (TXT)",
+                formatted_report,
+                f"candidate_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt",
+                "text/plain",
                 use_container_width=True
             )
         
         with col2:
-            exp = report['experience_analysis']
-            summary = f"""CANDIDATE INTELLIGENCE REPORT
-Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-
-OVERALL SCORE: {score}/100
-RECOMMENDATION: {recommendation}
-CONFIDENCE: {report['confidence']}
-
-COMPONENT SCORES:
-- Skills Match: {report['skill_analysis']['match_percentage']}%
-- Experience: {exp['total_years']} years
-- Seniority: {exp['seniority_level'].title()}
-
-MATCHED SKILLS: {len(report['skill_analysis']['matched_skills'])}
-MISSING SKILLS: {len(report['skill_analysis']['missing_skills'])}
-"""
             st.download_button(
-                "📥 Download Summary",
-                summary,
-                f"summary_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt",
-                "text/plain",
+                "📥 Download JSON Version",
+                json.dumps(report, indent=2),
+                f"candidate_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                "application/json",
                 use_container_width=True
             )
 
@@ -968,7 +848,6 @@ MISSING SKILLS: {len(report['skill_analysis']['missing_skills'])}
 def main():
     """Main application"""
     
-    # Header
     st.markdown("""
         <div class="header-box">
             <h1>JOB FIT ANALYZER</h1>
@@ -980,7 +859,6 @@ def main():
     
     st.markdown("---")
     
-    # Upload Documents
     st.markdown('<h2 class="upload-heading">📤 Upload Documents</h2>', unsafe_allow_html=True)
     
     col1, col2 = st.columns(2, gap="large")
@@ -1051,12 +929,10 @@ def main():
     
     st.markdown("---")
     
-    # Analyze Button
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         analyze = st.button("🚀 ANALYZE CANDIDATE", use_container_width=True)
     
-    # Analysis
     if analyze:
         has_resume = resume_file or (resume_text and resume_text.strip())
         has_jd = jd_file or (jd_text and jd_text.strip())
@@ -1069,7 +945,6 @@ def main():
         temp_dir = Path(tempfile.gettempdir())
         
         try:
-            # Handle resume
             if resume_file:
                 resume_path = temp_dir / f"resume_{resume_file.name}"
                 with open(resume_path, 'wb') as f:
@@ -1079,7 +954,6 @@ def main():
                 with open(resume_path, 'w', encoding='utf-8') as f:
                     f.write(resume_text)
             
-            # Handle JD
             if jd_file:
                 jd_path = temp_dir / f"jd_{jd_file.name}"
                 with open(jd_path, 'wb') as f:
@@ -1089,7 +963,6 @@ def main():
                 with open(jd_path, 'w', encoding='utf-8') as f:
                     f.write(jd_text)
             
-            # Run analysis
             with st.spinner("🔄 Analyzing candidate... Please wait"):
                 report = st.session_state.pipeline.analyze(resume_path, jd_path)
                 st.session_state.report = report
@@ -1106,7 +979,6 @@ def main():
             st.error(f"Details: {traceback.format_exc()}")
             return
     
-    # Display results
     if st.session_state.report:
         st.markdown("---")
         display_results(st.session_state.report)
